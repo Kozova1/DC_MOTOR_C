@@ -50,8 +50,8 @@ int set_motor_direction (bool D0, bool D1, unsigned int index);
  */
 int submit_motor (unsigned int index);
 struct motors {
-    unsigned int motor_pins[][8];
-    unsigned int free_motor_space;
+    static unsigned int motor_pins[][8];
+    static unsigned int free_motor_space;
 };
 
 bool check_motor (unsigned int index);
