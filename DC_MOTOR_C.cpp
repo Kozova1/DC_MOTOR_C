@@ -4,7 +4,7 @@ static struct motors _motors_list;
 
 int create_motor (unsigned int pwm, unsigned int en, unsigned int d0, unsigned int d1) {
     int _firstfreespace = 0;
-
+    _motors_list.free_motor_space = 0;
     while (_firstfreespace <= _motors_list.free_motor_space) {
         if (check_motor (_firstfreespace)) {
             break;
