@@ -4,13 +4,13 @@
 #ifndef DC_MOTOR_h
 #define DC_MOTOR_h
 
-#include <Arduino.h>
+#include <stdbool.h>
 
 /*
  * Creating a motor -> storing its pins in the table
  * PWM pin, EN pin, D0 pin, D1 pin.
  * PWM pin has to be connected to a PWM capable port
- * Valid Values: 
+ * Valid Values:
  * PWM: pin number
  * EN: pin number
  * D0 and D1: pin numbers
@@ -21,7 +21,7 @@ int create_motor (unsigned int pwm, unsigned int en, unsigned int d0, unsigned i
  * Required to run after creating the motor
  * this sets correct modes for all the pins of the motor
  * index: number of the motor to set up (Numbers start at zero)
- * Valid Values: 
+ * Valid Values:
  * index >= 0
  */
 int setup_motor (unsigned int index);
@@ -49,14 +49,9 @@ int set_motor_direction (bool D0, bool D1, unsigned int index);
  * index >= 0
  */
 int submit_motor (unsigned int index);
-struct motors {
-    static unsigned int motor_pins[][8];
-    static unsigned int free_motor_space;
-};
 
 bool check_motor (unsigned int index);
 
 int delete_motor (unsigned int index);
 
-int _clamp (int x, int upper, int lower);
 #endif
