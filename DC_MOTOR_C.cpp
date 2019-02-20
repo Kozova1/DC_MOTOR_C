@@ -31,9 +31,9 @@ int create_motor (unsigned int pwm, unsigned int en, unsigned int d0, unsigned i
 	temp[5] = 0;
 	temp[6] = 0;
 	temp[7] = 1;
-
-    for (int i=0; i < 8; i++) {
-        MOTORS.motor_pins[_firstfreespace][i] = temp[i];
+    int _1i;
+    for (_1i=0; _1i < 8; _1i++) {
+        MOTORS.motor_pins[_firstfreespace][_1i] = temp[_1i];
 		MOTORS.free_motor_space++;
     }
 }
@@ -51,8 +51,9 @@ int setup_motor (unsigned int index) {
     }
 }
 int delete_motor (unsigned int index) {
-    for (int i=0; i<8; i++) {
-        MOTORS.motor_pins[index][i] = 0;
+    int _i;
+    for (_i=0; _i<8; _i++) {
+        MOTORS.motor_pins[index][_i] = 0;
     }
 }
 
