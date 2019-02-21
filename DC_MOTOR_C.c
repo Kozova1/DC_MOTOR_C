@@ -93,7 +93,6 @@ int submit_motor(unsigned int index) {
     }
 }
 
-bool check_motor(unsigned int index)
-{
+bool check_motor(unsigned int index) {
 	return MOTORS.motor_pins[index][7] == 0;
 }
