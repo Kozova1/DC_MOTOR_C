@@ -2,10 +2,10 @@
 
 #include <Arduino.h>
 
-#define MAX_INDEX 64 // I don't know how big this can be
+#define MAX_MOTORS 64 // I don't know how big this can be
 
 struct motors {
-    unsigned int motor_pins[MAX_INDEX][8];
+    unsigned int motor_pins[MAX_MOTORS][8];
     unsigned int free_motor_space;
 };
 
@@ -61,9 +61,8 @@ int setup_motor (unsigned int index) {
         pinMode (MOTORS.motor_pins[index][3], OUTPUT);
 
         return 0;
-    } else {
+    } else
         return 1;
-    }
 }
 int delete_motor (unsigned int index) {
     /* Here we free the space of the motor by overwriting it with zeros.
