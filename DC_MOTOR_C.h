@@ -6,52 +6,26 @@
 
 #include <stdbool.h>
 
-/*
- * Creating a motor -> storing its pins in the table
- * PWM pin, EN pin, D0 pin, D1 pin.
- * PWM pin has to be connected to a PWM capable port
- * Valid Values:
- * PWM: pin number
- * EN: pin number
- * D0 and D1: pin numbers
- */
-int create_motor (unsigned int pwm, unsigned int en, unsigned int d0, unsigned int d1);
+struct motor_t {
+    unsigned int pins[4];
+    unsigned char queued_pins[4];
+};
 
-/*
- * Required to run after creating the motor
- * this sets correct modes for all the pins of the motor
- * index: number of the motor to set up (Numbers start at zero)
- * Valid Values:
- * index >= 0
- */
-int setup_motor (unsigned int index);
+enum motor_dir_t {
+    STOP_00 = 0,
+    STOP_11 = 3,
+    DIR_1 = 1,
+    DIR_2 = 2
+};
 
-/* Set speed of the motor
- * Valid Values
- * speed: 0-255, index >= 0
- */
-int set_motor_speed (unsigned int speed, unsigned int index);
+struct motor_t motor_create(unsigned int pwm, unsigned int en, unsigned int d0, unsigned int d1);
 
-/* Set direction of the motor
- * index: number of motor
- * D0, D1 -> control pins.
- * D0           D1         result
- * * * * * * * * * * * * * * * * * *
- * false        false      STOP
- * false        true       DIRECTION 1
- * true         false      DIRECTION 2
- * true         true       STOP
- * * * * * * * * * * * * * * * * * */
-int set_motor_direction (bool D0, bool D1, unsigned int index);
+void motor_setup(struct motor_t* motor);
 
-/* Send all settings to the motor
- * index: number of motor
- * index >= 0
- */
-int submit_motor (unsigned int index);
+void motor_speed(struct motor_t* motor, unsigned char speed);
 
-bool check_motor (unsigned int index);
+void motor_direction(struct motor_t* motor, enum motor_dir_t direction);
 
-int delete_motor (unsigned int index);
+void motor_write(struct motor_t* motor);
 
 #endif
